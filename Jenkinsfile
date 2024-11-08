@@ -22,5 +22,18 @@ pipeline{
                 sh "./gradlew test jacocoTestReport"
            }
        }
+       stage("docker build"){
+          steps{
+               sh "docker build -t jenkinspipeline ."
+          }
+      }
+   }
+
+   post{
+        always{
+            mail to: "ksn4568@naver.com",
+            subject: "Build Finish",
+            body: "Hello Email"
+        }
    }
 }
